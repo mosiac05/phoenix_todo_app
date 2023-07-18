@@ -39,8 +39,51 @@ defmodule PhoenixTodoAppWeb.TodoLive do
       socket
       |> assign(
         todo_list: todo_list,
-        todo_form: to_form(%{"title" => nil, "description" => nil})
+        todo_form: get_todo_form(),
+        todo_description: nil
       )
     }
   end
+
+  def handle_event(
+        "text-editor",
+        %{"text_content" => content, "field_name" => _field_name},
+        socket
+      ) do
+    {:noreply, socket |> assign(todo_description: content)}
+  end
+
+  def handle_event("validate", params, socket) do
+    {:noreply, socket |> assign(todo_form: to_form(params))}
+  end
+
+  def handle_event("submit-todo", params, socket) do
+    {:noreply, socket |> add_new_todo(params)}
+  end
+
+  defp add_new_todo(
+         %{assigns: %{todo_list: todo_list}} = socket,
+         %{"description" => description, "title" => title} = _new_todo
+       ) do
+    description =
+      new_todo = %{
+        id: length(todo_list) + 1,
+        status: "active",
+        title: title,
+        description: validate_description(description)
+      }
+
+    todo_list = todo_list |> List.insert_at(-1, new_todo)
+
+    socket
+    |> assign(
+      todo_list: todo_list,
+      todo_form: get_todo_form()
+    )
+    |> push_event("tinymce_reset", %{})
+  end
+
+  defp validate_description(description) when description in [nil, "", "<p></p>"], do: nil
+  defp validate_description(description), do: description
+  defp get_todo_form, do: %{"title" => nil, "description" => nil} |> to_form()
 end
