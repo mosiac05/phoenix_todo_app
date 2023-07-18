@@ -1,19 +1,28 @@
 <div class="flex flex-col gap-4">
   <h2 class="text-2xl text-sky-700 text-center font-medium tracking-wide">Todo App</h2>
-  <.form :let={f} for={@todo_form} class="flex flex-col gap-4 px-9 py-6 rounded shadow">
+  <.form
+    :let={f}
+    for={@todo_form}
+    class="flex flex-col gap-4 px-9 py-6 rounded shadow"
+    phx-submit="submit-todo"
+    phx-change="validate"
+  >
     <div>
       <%= Form.label(f, :title, "Title", class: "text-sm text-sky-700") %>
       <.input type="text" field={f[:title]} class="w-full rounded-sm border border-gray-200" />
     </div>
     <div>
       <%= Form.label(f, :description, "Description", class: "text-sm text-sky-700") %>
-      <.input
-        type="textarea"
-        field={f[:description]}
-        class="w-full rounded-sm border border-gray-200"
-      />
+      <div id="todo-description--textarea-tinymce" phx-update="ignore">
+        <textarea id="todo-description--tinymce" data-field="description" phx-hook="TinyMCEHook">
+        </textarea>
+      </div>
+
+      <%= Form.hidden_input(f, :description, value: @todo_description) %>
     </div>
-    <.button class="px-4 py-2 rounded-md bg-sky-700 text-white text-sm font-medium">Submit</.button>
+    <.button class="px-4 py-2 rounded-md bg-sky-700 text-white text-sm font-medium">
+      Submit
+    </.button>
   </.form>
   <hr />
   <div class="flex flex-col gap-2">
