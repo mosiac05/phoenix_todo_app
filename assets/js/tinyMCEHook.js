@@ -15,10 +15,13 @@ export default {
         'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
         'insertdatetime', 'media', 'table', 'help', 'wordcount'
       ],
+      external_plugins: {
+        'formula': '/images/tinymce-formula/plugin.min.js'
+      },
       toolbar: 'undo redo | blocks | ' +
         'bold italic backcolor image | alignleft aligncenter ' +
         'alignright alignjustify | bullist numlist outdent indent | ' +
-        'removeformat | help',
+        'formula | removeformat | help',
       content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
       placeholder: 'Type something here...',
     });

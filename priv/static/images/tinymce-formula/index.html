@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <title>Formula Editor</title>
+
+    <script type="text/javascript" src="js/mathjax/MathJax.js?config=TeX-AMS-MML_SVG"></script>
+    <script type="text/javascript" src="js/formula.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function() {
+            window.top.parameters = Url.get;
+            window.top.EditorObj = new Editor(window.actions, window.panels, window.top.parameters);
+            window.top.getData = function(callback){window.top.EditorObj.getEquationPng(callback);};
+        };
+    </script>
+    <link rel="stylesheet" type="text/css" href="css/formula.min.css">
+</head>
+<body id="fm-editor-body" style="width: 100%; min-width: 100%; height: 100%; min-height: 100%;">
+</body>
+</html>
