@@ -17,6 +17,7 @@ defmodule PhoenixTodoAppWeb.Router do
   scope "/", PhoenixTodoAppWeb do
     pipe_through :browser
 
+    post "/s3-file-uploads", S3UploadsController, :create
     live "/", TodoLive
   end
 

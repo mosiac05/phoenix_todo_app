@@ -1,3 +1,5 @@
+import { uploadFileToS3Bucket } from "./helpers";
+
 const closeAllToolbars = () => {
   document.querySelectorAll(".tox-toolbar__overflow").forEach(el => el.remove())
 }
@@ -24,6 +26,13 @@ export default {
         'formula | removeformat | help',
       content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
       placeholder: 'Type something here...',
+      image_uploadtab: true,
+      image_advtab: true,
+      images_upload_handler: (blobInfo, progress) => {
+        return new Promise((resolve, reject) => {
+          uploadFileToS3Bucket(blobInfo.blob(), resolve, reject);
+        })
+      },
     });
 
     const editor = tinymce.get(elID)

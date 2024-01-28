@@ -65,13 +65,12 @@ defmodule PhoenixTodoAppWeb.TodoLive do
          %{assigns: %{todo_list: todo_list}} = socket,
          %{"description" => description, "title" => title} = _new_todo
        ) do
-    description =
-      new_todo = %{
-        id: length(todo_list) + 1,
-        status: "active",
-        title: title,
-        description: validate_description(description)
-      }
+    new_todo = %{
+      id: length(todo_list) + 1,
+      status: "active",
+      title: title,
+      description: validate_description(description)
+    }
 
     todo_list = todo_list |> List.insert_at(-1, new_todo)
 

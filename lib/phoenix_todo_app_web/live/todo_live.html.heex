@@ -9,7 +9,13 @@
   >
     <div>
       <%= Form.label(f, :title, "Title", class: "text-sm text-sky-700") %>
-      <.input type="text" field={f[:title]} class="w-full rounded-sm border border-gray-200" />
+      <span class="text-red-400 text-sm">*</span>
+      <.input
+        type="text"
+        field={f[:title]}
+        required={true}
+        class="w-full rounded-sm border border-gray-200"
+      />
     </div>
     <div>
       <%= Form.label(f, :description, "Description", class: "text-sm text-sky-700") %>
