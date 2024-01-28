@@ -16,3 +16,10 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+## For Private Config Environment Variables (Required)
+  * Copy the `config/private_config.sample.exs` file.
+  * Rename the copied file to `private_config.secret.exs`
+  * Update each variable with the appropriate values.
+  * Ensure `REQUIRED` variables are not empty.
+  * Restart the server.

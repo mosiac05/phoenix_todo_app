@@ -53,8 +53,8 @@ defmodule PhoenixTodoAppWeb.Components.TodoItemComponent do
         <% end %>
       </div>
       <div class={[
-        "text-gray-500 text-xs font-light",
-        is_nil(@todo_item.description) && "italic",
+        "text-xs font-light prose prose-neutral",
+        is_nil(@todo_item.description) && "text-gray-500 italic",
         !@show_description && "hidden"
       ]}>
         <%= if @todo_item.description, do: raw(@todo_item.description), else: "No description." %>
